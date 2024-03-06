@@ -1,7 +1,11 @@
 import os
+from environ import Env
+
+env = Env()
+env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = 'g4c15fj2t25w!86q#iw1e^v5p9152cm#ye%8z650-o6@i(kt)-'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
@@ -47,11 +51,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "kanban_db",
-        "USER": "postgres",
-        "PASSWORD": "isaac100",
+        "NAME": env("DATABASE_NAME"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
