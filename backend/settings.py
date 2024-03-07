@@ -7,7 +7,8 @@ env.read_env()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = True
-ALLOWED_HOSTS = ["*"]
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -15,13 +16,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'psycopg2',
     'django',
     'drf_yasg',
     'base'
 ]
+
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000', 
+    'https://localhost:3000', 
+]
+CORS_ORIGIN_ALLOW_ALL = True
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
